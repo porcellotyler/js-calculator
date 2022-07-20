@@ -1,39 +1,50 @@
-// Operator functions given inputs a & b
+// Operator functions given inputs a, b & operator
 
-function addition(a, b) {
-    let aNum = parseInt(a);
-    let bNum = parseInt(b);
-    return displayDiv.textContent = aNum + bNum
-};
+function operate(array1, array2, operator) {
+    let arrayNum1 = array1.join("");
+    let arrayNum2 = array2.join("");
+    
+    let aNum = parseInt(arrayNum1);
+    let bNum = parseInt(arrayNum2);
+    let answer;
 
-function subtraction(a, b) {
-    let aNum = parseInt(a);
-    let bNum = parseInt(b);
-    return displayDiv.textContent = aNum - bNum
-};
+    if (arrayNum2 == '') {
+        return displayDiv.textContent = "ERROR: must enter 2 numbers"
+    };
 
-function multiplication(a, b) {
-    let aNum = parseInt(a);
-    let bNum = parseInt(b);
-    return displayDiv.textContent = (aNum * bNum) 
-};
-
-function division(a, b) {
-    let aNum = parseInt(a);
-    let bNum = parseInt(b);
-    return displayDiv.textContent = (aNum / bNum)
-}; 
-
-function operate(operator, num1, num2) {
     if (operator == '+') {
-        return addition(num1, num2)
+        answer = aNum + bNum;
+            // Setting storage1 to the answer so the user can chain operations. 
+        storage1 = String(answer).split("").map((answer) => {
+            return Number(answer)});
+        storage2 = [];
+        operatorStorage = [];
+        
+        return displayDiv.textContent = answer
+
     } else if (operator == '-') {
-        return subtraction(num1, num2)
+        answer = aNum - bNum;
+
+        storage1 = String(answer).split("").map((answer) => {
+            return Number(answer)});
+        storage2 = [];
+        
+        return displayDiv.textContent = answer
     } else if (operator == 'x') {
-        return multiplication(num1, num2)
+        answer = (aNum * bNum);
+
+        storage1 = String(answer).split("").map((answer) => {
+            return Number(answer)})
+        storage2 = [];
+
+        return displayDiv.textContent = answer 
     } else if (operator == '/') {
-        return division(num1, num2)
-    }
+        if (bNum == 0) {
+            return displayDiv.textContent = "C'mon son you can't divide by 0";
+        } else {
+            return displayDiv.textContent = (aNum / bNum)//.toFixed(1)
+        }
+    };
 };
 
 let displayDiv = document.createElement('div');
@@ -50,21 +61,79 @@ let storage2 = [];
 let operatorStorage = [];
 
 function numArrays(num) {
-        displayDiv.textContent = num;
-    
     if (operatorStorage == '+' || operatorStorage == '-' || operatorStorage == 'x' || operatorStorage == '/') {
         storage2.push(num); 
+        displayDiv.textContent = `${storage1.join("")} ${operatorStorage} ${storage2.join("")}`;
     } else {
         storage1.push(num);
+        displayDiv.textContent = storage1.join("");
     };
 };
 
 allOperators.forEach((button) => {
     button.addEventListener("click", () => {
         let buttonText = button.innerText
-        displayDiv.textContent = buttonText;
 
-        operatorStorage.push(buttonText);
+        if (storage1.length > 0 && operatorStorage.length > 0 && storage2.length > 0) {
+            function innerOp(array1, array2, operator) {
+                let arrayNum1 = array1.join("");
+                let arrayNum2 = array2.join("");
+    
+                let aNum = parseInt(arrayNum1);
+                let bNum = parseInt(arrayNum2);
+                let answer;
+
+                if (operator == '+') {
+                    answer = aNum + bNum;
+                        // Setting storage1 to the answer so the user can chain operations. 
+                    storage1 = String(answer).split("").map((answer) => {
+                        return Number(answer)});
+                    storage2 = [];
+                    operatorStorage = [];
+                    
+                    return displayDiv.textContent = answer
+
+                } else if (operator == '-') {
+                    answer = aNum - bNum;
+
+                    storage1 = String(answer).split("").map((answer) => {
+                        return Number(answer)});
+                    storage2 = [];
+                    operatorStorage = [];
+                    
+                    return displayDiv.textContent = answer
+                } else if (operator == 'x') {
+                    answer = (aNum * bNum);
+
+                    storage1 = String(answer).split("").map((answer) => {
+                        return Number(answer)})
+                    storage2 = [];
+                    operatorStorage = [];
+
+                    return displayDiv.textContent = answer 
+                } else if (operator == '/') {
+                    if (bNum == 0) {
+                        return displayDiv.textContent = "C'mon son you can't divide by 0";
+                    } else {
+                        answer = (aNum / bNum)//.toFixed(1);
+
+                        storage1 = String(answer).split("").map((answer) => {
+                            return Number(answer)})
+                        storage2 = [];
+                        operatorStorage = [];
+
+                        return displayDiv.textContent = answer;
+                    }
+                };
+            };
+            innerOp(storage1, storage2, operatorStorage);
+
+            operatorStorage.push(buttonText);
+            return 
+        } else { //seems like a user could add more than one operation and break it instead of error out
+            displayDiv.textContent = `${storage1.join("")} ${buttonText}`;
+            operatorStorage.push(buttonText);
+        }
     });
 });
 
@@ -80,51 +149,19 @@ equalSign.forEach((button) => { //could prob delete for each here as well
     button.addEventListener("click", () => {
         let buttonText = button.innerText;
         displayDiv.textContent = buttonText;
-
-        return operateFilter(operatorStorage);
+        
+        return operate(storage1, storage2, operatorStorage);
     })
 });
 
-function operateFilter(sign) {
-    if (sign == '+') {
-        additionPrep(storage1, storage2);
-    } else if (sign == '-') {
-        subtractionPrep(storage1, storage2);
-    } else if (sign == 'x') {
-        multiplicationPrep(storage1, storage2);
-    } else if (sign == '/') {
-        divisionPrep(storage1, storage2);
-    }
-};
-
-//These prep the input array to pass to the operation
-function additionPrep(array1, array2) {
-    let newNumber1 = array1.join("");
-    let newNumber2 = array2.join("");
-    return addition(newNumber1, newNumber2);
-};
-
-function subtractionPrep(array1, array2) {
-    let newNumber1 = array1.join("");
-    let newNumber2 = array2.join("");
-    return subtraction(newNumber1, newNumber2);
-};
-
-function multiplicationPrep(array1, array2) {
-    let newNumber1 = array1.join("");
-    let newNumber2 = array2.join("");
-    return multiplication(newNumber1, newNumber2);
-};
-
-function divisionPrep(array1, array2) {
-    let newNumber1 = array1.join("");
-    let newNumber2 = array2.join("");
-    return division(newNumber1, newNumber2);
-};
-
 /*
+add decimal rounding functionality
 
-figure out how to process multi operator inputs 
+add . button and allow users to input decimals (only one per number though)
 
-for example: 1 + 2 + 7 = 10
+add backspace button
+
+add keyboard functionality
+
+add ui
 */
