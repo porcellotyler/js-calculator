@@ -49,14 +49,15 @@ let storage1 = [];
 let storage2 = [];
 let operatorStorage = [];
 
-allNums.forEach((button) => {
-    button.addEventListener("click", () => {
-        let buttonText = button.innerText
-        displayDiv.textContent = buttonText;
-        
-        storage1.push(buttonText);
-    }) 
-});
+function numArrays(num) {
+        displayDiv.textContent = num;
+    
+    if (operatorStorage == '+' || operatorStorage == '-' || operatorStorage == 'x' || operatorStorage == '/') {
+        storage2.push(num); 
+    } else {
+        storage1.push(num);
+    };
+};
 
 allOperators.forEach((button) => {
     button.addEventListener("click", () => {
@@ -64,35 +65,18 @@ allOperators.forEach((button) => {
         displayDiv.textContent = buttonText;
 
         operatorStorage.push(buttonText);
-
-        //to push subsequent numbers to storage2 array
-        allNums.forEach((button) => {
-            button.addEventListener("click", () => {
-                let buttonText = button.innerText;
-                displayDiv.textContent = buttonText;
-
-                storage2.push(buttonText);
-                    //applying pop to 1st storage array so numbers arent entered unintentionally
-                storage1.pop();   
-            })
-        })
-    }) 
+    });
 });
 
-clearBtn.forEach((button) => {
-    button.addEventListener("click", () => {
-        let buttonText = "";
-        displayDiv.textContent = buttonText;
+function clearing() {
+    displayDiv.textContent = "";
 
-            //below is clearing the arrays but getting NaN on operation after clearing
-        storage1 = [];
-        storage2 = [];
-        operatorStorage = [];
-        return
-    })
-});
+    storage1 = [];
+    storage2 = [];
+    operatorStorage = [];
+}
 
-equalSign.forEach((button) => {
+equalSign.forEach((button) => { //could prob delete for each here as well
     button.addEventListener("click", () => {
         let buttonText = button.innerText;
         displayDiv.textContent = buttonText;
