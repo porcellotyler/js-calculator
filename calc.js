@@ -28,6 +28,7 @@ function operate(array1, array2, operator) {
         storage1 = String(answer).split("").map((answer) => {
             return Number(answer)});
         storage2 = [];
+        operatorStorage = [];
         
         return displayDiv.textContent = answer
     } else if (operator == 'x') {
@@ -36,25 +37,35 @@ function operate(array1, array2, operator) {
         storage1 = String(answer).split("").map((answer) => {
             return Number(answer)})
         storage2 = [];
+        operatorStorage = [];
 
         return displayDiv.textContent = answer 
     } else if (operator == '/') {
         if (bNum == 0) {
             return displayDiv.textContent = "C'mon son you can't divide by 0";
         } else {
-            return displayDiv.textContent = (aNum / bNum)//.toFixed(1)
+            answer = (aNum / bNum)
+
+            storage1 = String(answer).split("").map((answer) => {
+                return Number(answer)})
+            storage2 = [];
+            operatorStorage = [];
+            
+            return displayDiv.textContent = answer//.toFixed(1)
         }
     };
 };
 
-let displayDiv = document.createElement('div');
-    container.appendChild(displayDiv);
-    displayDiv.textContent = '';
-
+let numBox = document.getElementById("numBox");
 let allNums = document.querySelectorAll("button.numBtn");
 let allOperators = document.querySelectorAll("button.operator");
 let equalSign = document.querySelectorAll("button.equals");
 let clearBtn = document.querySelectorAll("button.clear");
+
+let displayDiv = document.createElement('div');
+    container.insertBefore(displayDiv, calcBody);
+    displayDiv.textContent = '';
+    displayDiv.classList.add("display");
 
 let storage1 = [];
 let storage2 = [];
@@ -155,7 +166,7 @@ equalSign.forEach((button) => { //could prob delete for each here as well
 });
 
 /*
-add decimal rounding functionality
+add decimal rounding functionality - base on ui screen though
 
 add . button and allow users to input decimals (only one per number though)
 
@@ -163,5 +174,4 @@ add backspace button
 
 add keyboard functionality
 
-add ui
 */

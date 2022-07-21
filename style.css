@@ -1,0 +1,77 @@
+body {
+    background-color: darkgrey;
+    font-family: Menlo, Monaco, 'Courier New', monospace;
+    padding: 25%;
+}
+
+#container {
+    width: 250px;
+    height: 300px;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(113, 255, 255);
+    border-width: 2px;
+    border-radius: 15px;
+}
+
+.calcBody {
+    display: flex;
+    
+}
+
+#numBox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#numBox>* { /* this allows the 0 button to fill the space beyond its set size */
+    flex: 1 1 60px;
+}
+
+.numBtn {
+    width: 60px;
+    height: 56.25px;
+    background-color: black;
+    border: solid;
+    border-color: rgb(113, 255, 255);
+    border-width: 1px;
+    color: rgb(87, 90, 241);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#zeroBtn {
+    border-radius: 0px 0px 0px 15px;
+}
+
+#funcBtn {
+    width: 70px;
+    height: 37.5px;
+    background-color: black;
+    border: solid;
+    border-color: rgb(113, 255, 255);
+    border-width: 1px;
+    color: rgb(245, 243, 135);
+    font-size: 24px;
+    cursor: pointer;
+    
+}
+
+.clear {
+    border-radius: 0px 0px 15px 0px;
+}
+
+#functionBox {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.display {
+    background-color: black;
+    width: 250px;
+    height: 75px;
+    font-size: 48px;
+    border-radius: 15px 15px 0px 0px;
+    color: whitesmoke;
+}

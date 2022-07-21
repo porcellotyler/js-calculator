@@ -4,32 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Calculator</title>
 </head>
 <body>
     <div id="container">
-        <div id="numBox">
-            <button class="numBtn" onclick="numArrays(1)">1</button>
-            <button class="numBtn" onclick="numArrays(2)">2</button>
-            <button class="numBtn" onclick="numArrays(3)">3</button>
-            <button class="numBtn" onclick="numArrays(4)">4</button>
-            <button class="numBtn" onclick="numArrays(5)">5</button>
-            <button class="numBtn" onclick="numArrays(6)">6</button>
-            <button class="numBtn" onclick="numArrays(7)">7</button>
-            <button class="numBtn" onclick="numArrays(8)">8</button>
-            <button class="numBtn" onclick="numArrays(9)">9</button>
-            <button class="numBtn" onclick="numArrays(0)">0</button>
-        </div>
+        <div id="calcBody" class="calcBody">
+            <div id="numBox">
+                <button class="numBtn" onclick="numArrays(1)">1</button>
+                <button class="numBtn" onclick="numArrays(2)">2</button>
+                <button class="numBtn" onclick="numArrays(3)">3</button>
+                <button class="numBtn" onclick="numArrays(4)">4</button>
+                <button class="numBtn" onclick="numArrays(5)">5</button>
+                <button class="numBtn" onclick="numArrays(6)">6</button>
+                <button class="numBtn" onclick="numArrays(7)">7</button>
+                <button class="numBtn" onclick="numArrays(8)">8</button>
+                <button class="numBtn" onclick="numArrays(9)">9</button>
+                <button class="numBtn" id="zeroBtn" onclick="numArrays(0)">0</button>
+            </div>
 
-        <div id="functionBox">
-            <ol>
-                <li><button class="operator">+</button></li>
-                <li><button class="operator">-</button></li>
-                <li><button class="operator">x</button></li>
-                <li><button class="operator">/</button></li>
-                <li><button class="equals">=</button></li>
-                <li><button class="clear" onclick="clearing()">C</button></li>
-            </ol>
+            <div id="functionBox">
+                    <button id="funcBtn" class="operator">+</button>
+                    <button id="funcBtn" class="operator">-</button>
+                    <button id="funcBtn" class="operator">x</button>
+                    <button id="funcBtn" class="operator">/</button>
+                    <button id="funcBtn" class="equals">=</button>
+                    <button id="funcBtn" class="clear" onclick="clearing()">C</button>
+            </div>
         </div>
     </div>
     <script src="calc.js"></script>
