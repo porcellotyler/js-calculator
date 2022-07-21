@@ -4,16 +4,17 @@ function operate(array1, array2, operator) {
     let arrayNum1 = array1.join("");
     let arrayNum2 = array2.join("");
     
-    let aNum = parseInt(arrayNum1);
-    let bNum = parseInt(arrayNum2);
+    let aNum = parseFloat(arrayNum1);
+    let bNum = parseFloat(arrayNum2);
     let answer;
 
     if (arrayNum2 == '') {
-        return displayDiv.textContent = "ERROR: must enter 2 numbers"
+        return displayDiv.textContent = "ERROR: NEED 2 NUMBERS"
     };
 
     if (operator == '+') {
-        answer = aNum + bNum;
+        subAnswer = aNum + bNum;
+        answer = Math.round(subAnswer * 100) / 100
             // Setting storage1 to the answer so the user can chain operations. 
         storage1 = String(answer).split("").map((answer) => {
             return Number(answer)});
@@ -23,7 +24,8 @@ function operate(array1, array2, operator) {
         return displayDiv.textContent = answer
 
     } else if (operator == '-') {
-        answer = aNum - bNum;
+        subAnswer = aNum - bNum;
+        answer = Math.round(subAnswer * 100) / 100
 
         storage1 = String(answer).split("").map((answer) => {
             return Number(answer)});
@@ -32,7 +34,8 @@ function operate(array1, array2, operator) {
         
         return displayDiv.textContent = answer
     } else if (operator == 'x') {
-        answer = (aNum * bNum);
+        subAnswer = aNum * bNum;
+        answer = Math.round(subAnswer * 100) / 100
 
         storage1 = String(answer).split("").map((answer) => {
             return Number(answer)})
@@ -42,9 +45,10 @@ function operate(array1, array2, operator) {
         return displayDiv.textContent = answer 
     } else if (operator == '/') {
         if (bNum == 0) {
-            return displayDiv.textContent = "C'mon son you can't divide by 0";
+            return displayDiv.textContent = "CAN'T DIVIDE BY 0";
         } else {
-            answer = (aNum / bNum)
+            subAnswer = aNum / bNum;
+            answer = Math.round(subAnswer * 100) / 100
 
             storage1 = String(answer).split("").map((answer) => {
                 return Number(answer)})
@@ -90,8 +94,8 @@ allOperators.forEach((button) => {
                 let arrayNum1 = array1.join("");
                 let arrayNum2 = array2.join("");
     
-                let aNum = parseInt(arrayNum1);
-                let bNum = parseInt(arrayNum2);
+                let aNum = parseFloat(arrayNum1);
+                let bNum = parseFloat(arrayNum2);
                 let answer;
 
                 if (operator == '+') {
@@ -99,6 +103,7 @@ allOperators.forEach((button) => {
                         // Setting storage1 to the answer so the user can chain operations. 
                     storage1 = String(answer).split("").map((answer) => {
                         return Number(answer)});
+                        console.log(storage1)
                     storage2 = [];
                     operatorStorage = [];
                     
@@ -124,7 +129,7 @@ allOperators.forEach((button) => {
                     return displayDiv.textContent = answer 
                 } else if (operator == '/') {
                     if (bNum == 0) {
-                        return displayDiv.textContent = "C'mon son you can't divide by 0";
+                        return displayDiv.textContent = "CAN'T DIVIDE BY 0";
                     } else {
                         answer = (aNum / bNum)//.toFixed(1);
 
@@ -166,12 +171,14 @@ equalSign.forEach((button) => { //could prob delete for each here as well
 });
 
 /*
-add decimal rounding functionality - base on ui screen though
 
 add . button and allow users to input decimals (only one per number though)
 
 add backspace button
 
 add keyboard functionality
+
+fix decimal issues when chaining operations
+    for example 1.1 + 2.2 + ... should display 3.3 +, however shows 3NaN3 +, when num2 is entered, .3 is cut from function
 
 */
